@@ -7,26 +7,30 @@ import { format } from '../../utils/utils';
   shadow: true,
 })
 export class MyComponent {
-  /**
-   * The first name
-   */
-  @Prop() first: string;
+  @Prop() headline: string;
+  @Prop() number: string;
+  @Prop() of: string;
+  @Prop() goal: string;
 
-  /**
-   * The middle name
-   */
-  @Prop() middle: string;
-
-  /**
-   * The last name
-   */
-  @Prop() last: string;
-
-  private getText(): string {
-    return format(this.first, this.middle, this.last);
+  getText(): string {
+    return format(this.number, this.of, this.goal);
   }
 
   render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+    const percentage = (parseInt(this.number) / parseInt(this.goal)) * 100;
+    return (
+      <div class="wrapper">
+        <h1>{this.headline}</h1>
+        <p>{this.getText()} participants</p>
+        <div class="participants">
+          <span>0</span>
+          <span>{this.goal}</span>
+        </div>
+        <div class="progressbar">
+          <span class="progressbar__tooltip">{percentage} %</span>
+          <div class="progressbar__value"></div>
+        </div>
+      </div>
+    );
   }
 }

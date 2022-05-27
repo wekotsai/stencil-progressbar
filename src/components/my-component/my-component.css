@@ -1,3 +1,75 @@
 :host {
-  display: block;
+  --progress-value: 50%;
+  font-family: 'GT-America', 'Helvetica', 'Arial', sans-serif;
+  background-color: #ffede7;
+  color: #000080;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  height: 100vh;
+  padding: 0;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 500;
+  padding-top: 1rem;
+  margin-bottom: 36px;
+}
+
+.wrapper {
+  background-color: #ffffff;
+  padding: 0 2.5rem;
+  margin: 2rem;
+  border-radius: 50px;
+  height: auto;
+  max-width: 340px;
+}
+
+.participants {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.progressbar {
+  background-color: #ccdef1;
+  margin-bottom: 4.25rem;
+  border-radius: 50px;
+  position: relative;
+}
+
+.progressbar__value {
+  height: 10px;
+  border-radius: 50px;
+  background-color: #000080;
+  width: var(--progress-value);
+}
+
+.progressbar__tooltip {
+  position: absolute;
+  top: 25px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  border-radius: 6px;
+  padding: 0.5rem;
+  background-color: #000080;
+  color: #ffffff;
+  font-size: 16px;
+  text-align: center;
+  pointer-events: none;
+  transition: 0.3s opacity, 0.15s bottom;
+  left: var(--progress-value);
+}
+
+.progressbar__tooltip::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: calc(50% - 8px);
+  border-bottom: 8px solid #000080;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
 }
