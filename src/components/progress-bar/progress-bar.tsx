@@ -1,4 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'progress-bar',
@@ -6,17 +6,24 @@ import { Component, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class ProgressBar {
-  @Prop() headline: string;
-  @Prop() number: string;
+  @Prop() currentnumber: string;
   @Prop() goal: string;
+  @Event() valueChanged: EventEmitter<string>;
+
+  onInput(event: Event) {
+    this.currentnumber = (event.target as HTMLInputElement).value;
+    this.valueChanged.emit(this.currentnumber);
+  }
 
   render() {
-    const percentage = (parseInt(this.number) / parseInt(this.goal)) * 100;
+    const percentage = (parseInt(this.currentnumber) / parseInt(this.goal)) * 100;
     return (
       <div class="wrapper">
-        <h1>{this.headline}</h1>
+        <h1>
+          <slot name="my-headline" />
+        </h1>
         <p>
-          {this.number} of {this.goal} participants
+          <input class="progressbar__input" value={this.currentnumber} type="text" onInput={e => this.onInput.bind(e)} /> of {this.goal} participants
         </p>
         <div class="participants">
           <span>0</span>

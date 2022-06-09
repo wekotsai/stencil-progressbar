@@ -73,3 +73,12 @@ h1 {
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
 }
+
+.progressbar__input {
+  border: solid 1px #000080 !important;
+  color: #000080;
+  font-size: 16px;
+  width: 50px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}

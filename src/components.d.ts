@@ -6,13 +6,20 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface MyHeadline {
+    }
     interface ProgressBar {
+        "currentnumber": string;
         "goal": string;
-        "headline": string;
-        "number": string;
     }
 }
 declare global {
+    interface HTMLMyHeadlineElement extends Components.MyHeadline, HTMLStencilElement {
+    }
+    var HTMLMyHeadlineElement: {
+        prototype: HTMLMyHeadlineElement;
+        new (): HTMLMyHeadlineElement;
+    };
     interface HTMLProgressBarElement extends Components.ProgressBar, HTMLStencilElement {
     }
     var HTMLProgressBarElement: {
@@ -20,16 +27,20 @@ declare global {
         new (): HTMLProgressBarElement;
     };
     interface HTMLElementTagNameMap {
+        "my-headline": HTMLMyHeadlineElement;
         "progress-bar": HTMLProgressBarElement;
     }
 }
 declare namespace LocalJSX {
+    interface MyHeadline {
+    }
     interface ProgressBar {
+        "currentnumber"?: string;
         "goal"?: string;
-        "headline"?: string;
-        "number"?: string;
+        "onValueChanged"?: (event: CustomEvent<string>) => void;
     }
     interface IntrinsicElements {
+        "my-headline": MyHeadline;
         "progress-bar": ProgressBar;
     }
 }
@@ -37,6 +48,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "my-headline": LocalJSX.MyHeadline & JSXBase.HTMLAttributes<HTMLMyHeadlineElement>;
             "progress-bar": LocalJSX.ProgressBar & JSXBase.HTMLAttributes<HTMLProgressBarElement>;
         }
     }
