@@ -1,27 +1,23 @@
 import { Component, Prop, h } from '@stencil/core';
-import { format } from '../../utils/utils';
 
 @Component({
-  tag: 'my-component',
-  styleUrl: 'my-component.css',
+  tag: 'progress-bar',
+  styleUrl: 'progress-bar.css',
   shadow: true,
 })
-export class MyComponent {
+export class ProgressBar {
   @Prop() headline: string;
   @Prop() number: string;
-  @Prop() of: string;
   @Prop() goal: string;
-
-  getText(): string {
-    return format(this.number, this.of, this.goal);
-  }
 
   render() {
     const percentage = (parseInt(this.number) / parseInt(this.goal)) * 100;
     return (
       <div class="wrapper">
         <h1>{this.headline}</h1>
-        <p>{this.getText()} participants</p>
+        <p>
+          {this.number} of {this.goal} participants
+        </p>
         <div class="participants">
           <span>0</span>
           <span>{this.goal}</span>
