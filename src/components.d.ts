@@ -7,8 +7,9 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface ProgressBar {
-        "currentnumber": string;
-        "goal": string;
+        "currentNumber": number;
+        "measureWord": string;
+        "targetNumber": number;
     }
 }
 declare global {
@@ -24,9 +25,10 @@ declare global {
 }
 declare namespace LocalJSX {
     interface ProgressBar {
-        "currentnumber"?: string;
-        "goal"?: string;
+        "currentNumber"?: number;
+        "measureWord"?: string;
         "onValueChanged"?: (event: CustomEvent<any>) => void;
+        "targetNumber"?: number;
     }
     interface IntrinsicElements {
         "progress-bar": ProgressBar;

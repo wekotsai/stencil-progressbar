@@ -1,5 +1,4 @@
 :host {
-  /* --progress-value: 50%; */
   font-family: 'GT-America', 'Helvetica', 'Arial', sans-serif;
   background-color: #ffede7;
   color: #000080;
@@ -45,8 +44,7 @@ h1 {
   height: 10px;
   border-radius: 50px;
   background-color: #000080;
-  /* width: var(--progress-value); */
-  /* width: 100%; */
+  transition: width linear 300ms;
 }
 
 .progressbar__tooltip {
@@ -61,8 +59,7 @@ h1 {
   font-size: 16px;
   text-align: center;
   pointer-events: none;
-  transition: 0.3s opacity, 0.15s bottom;
-  /* left: var(--progress-value); */
+  transition: left linear 300ms;
 }
 
 .progressbar__tooltip::after {

@@ -1,4 +1,4 @@
-import { Component, Event, Prop, h, Element, State } from '@stencil/core';
+import { Component, Event, Prop, h, State } from '@stencil/core';
 
 @Component({
   tag: 'progress-bar',
@@ -6,33 +6,40 @@ import { Component, Event, Prop, h, Element, State } from '@stencil/core';
   shadow: true,
 })
 export class ProgressBar {
-  @Prop() currentnumber: string;
-  @Prop() goal: string;
-  @Event() valueChanged: string;
-  @Element() host: HTMLElement;
-  @State() progressValue: number;
+  @Prop() currentNumber: number;
+  @Prop() targetNumber: number;
+  @Prop() measureWord: string;
+  @Event() valueChanged: number;
+  @State() startingNumber: number = 0;
 
   inputHandler(event) {
-    this.currentnumber = event.target.value;
-    this.valueChanged = this.currentnumber;
+    if (this.currentNumber <= this.targetNumber) {
+      this.currentNumber = event.target.value;
+      this.valueChanged = this.currentNumber;
+    } else {
+      console.log('number exceeding target number!');
+    }
   }
 
   getValue() {
-    return (parseInt(this.currentnumber) / parseInt(this.goal)) * 100;
+    const number = (this.currentNumber / this.targetNumber) * 100;
+    if (number <= 100) {
+      return Math.round(number);
+    } else if (number > 100) {
+      return 100;
+    }
   }
 
   render() {
     return (
       <div class="wrapper">
-        <h1>
-          <slot name="my-headline" />
-        </h1>
+        <slot name="my-headline" />
         <p>
-          <input class="progressbar__input" value={this.currentnumber} type="text" onChange={this.inputHandler.bind(this)} /> of {this.goal} participants
+          <input class="progressbar__input" type="text" value={this.currentNumber} onChange={this.inputHandler.bind(this)} /> of {this.targetNumber} {this.measureWord}
         </p>
         <div class="participants">
           <span>0</span>
-          <span>{this.goal}</span>
+          <span>{this.targetNumber}</span>
         </div>
         <div class="progressbar">
           <span class="progressbar__tooltip" style={{ left: `${this.getValue()}%` }}>
